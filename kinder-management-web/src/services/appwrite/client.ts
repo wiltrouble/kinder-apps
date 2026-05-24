@@ -1,4 +1,4 @@
-import { Account, Client, Databases } from "appwrite";
+import { Account, Client, TablesDB } from "appwrite";
 
 import { env } from "@/constants/env";
 
@@ -8,4 +8,4 @@ const client = new Client()
 
 export const appwriteClient = client;
 export const account = new Account(client);
-export const databases = new Databases(client);
+export const tablesDb = new TablesDB(client);

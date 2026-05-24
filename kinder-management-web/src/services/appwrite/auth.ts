@@ -1,12 +1,12 @@
 import { AppwriteException } from "appwrite";
 
+import { account } from "@/services/appwrite/client";
+import { usersService } from "@/services/appwrite/users";
 import {
-  mapAppwriteUser,
+  mapAppwriteAccountUser,
   type AppwriteSession,
-  type AuthUser,
+  type AuthContext,
 } from "@/types/auth";
-
-import { account } from "./client";
 
 export interface LoginPayload {
   email: string;
@@ -23,35 +23,55 @@ const toError = (error: unknown, fallbackMessage: string): Error => {
   return new Error(fallbackMessage);
 };
 
+const isUnauthorized = (error: unknown): boolean =>
+  error instanceof AppwriteException &&
+  (error.code === 401 || error.type === "general_unauthorized_scope");
+
 export const authService = {
   async login({ email, password }: LoginPayload): Promise<AppwriteSession> {
     try {
-      return await account.createEmailPasswordSession(email, password);
+      return await account.createEmailPasswordSession({ email, password });
     } catch (error) {
       throw toError(error, "Invalid email or password");
     }
   },
 
-  async getCurrentUser(): Promise<AuthUser | null> {
+  async logout(): Promise<void> {
     try {
-      const user = await account.get();
-      return mapAppwriteUser(user);
+      await account.deleteSession({ sessionId: "current" });
     } catch (error) {
-      if (
-        error instanceof AppwriteException &&
-        (error.code === 401 || error.type === "general_unauthorized_scope")
-      ) {
-        return null;
-      }
-      return null;
+      if (isUnauthorized(error)) return;
+      throw toError(error, "Failed to log out");
     }
   },
 
-  async logout(): Promise<void> {
+  async getCurrentUser(): Promise<AuthContext | null> {
+    let accountUser;
     try {
-      await account.deleteSession("current");
+      accountUser = await account.get();
     } catch (error) {
-      throw toError(error, "Failed to log out");
+      if (isUnauthorized(error)) return null;
+      if (process.env.NODE_ENV !== "production") {
+        console.error("[auth] account.get failed", error);
+      }
+      return null;
+    }
+
+    const user = mapAppwriteAccountUser(accountUser);
+
+    try {
+      const { role, permissions } = await usersService.fetchUserContext(
+        user.id,
+      );
+      return { user, role, permissions };
+    } catch (error) {
+      if (process.env.NODE_ENV !== "production") {
+        console.warn(
+          "[auth] failed to load user context; continuing without role",
+          error,
+        );
+      }
+      return { user, role: null, permissions: [] };
     }
   },
 };

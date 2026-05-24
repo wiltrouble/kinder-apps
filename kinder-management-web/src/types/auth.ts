@@ -1,6 +1,8 @@
 import type { Models } from "appwrite";
 
-export type AppwriteUser = Models.User<Models.Preferences>;
+import type { Permission, Role, RoleRow } from "@/types/role";
+
+export type AppwriteAccountUser = Models.User<Models.Preferences>;
 export type AppwriteSession = Models.Session;
 
 export interface AuthUser {
@@ -11,7 +13,22 @@ export interface AuthUser {
   createdAt: string;
 }
 
-export const mapAppwriteUser = (user: AppwriteUser): AuthUser => ({
+export interface UserRow extends Models.Row {
+  name?: string;
+  email?: string;
+  authUserId?: string;
+  roleId?: string | RoleRow | null;
+}
+
+export interface AuthContext {
+  user: AuthUser;
+  role: Role | null;
+  permissions: Permission[];
+}
+
+export const mapAppwriteAccountUser = (
+  user: AppwriteAccountUser,
+): AuthUser => ({
   id: user.$id,
   email: user.email,
   name: user.name,

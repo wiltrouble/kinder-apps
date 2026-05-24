@@ -3,10 +3,9 @@
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
-import { routes } from "@/constants/routes";
+import { FullPageLoader } from "@/components/shared/fullPageLoader";
 import { useAuth } from "@/hooks/useAuth";
-
-import { FullPageLoader } from "./FullPageLoader";
+import { routes } from "@/lib/routes";
 
 interface GuestGuardProps {
   children: ReactNode;

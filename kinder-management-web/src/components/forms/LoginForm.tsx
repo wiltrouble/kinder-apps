@@ -17,8 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { routes } from "@/constants/routes";
 import { useAuth } from "@/hooks/useAuth";
+import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import {
   loginSchema,
@@ -43,8 +43,10 @@ export const LoginForm = () => {
 
   const onSubmit = async (values: LoginFormValues) => {
     try {
-      const user = await login(values);
-      toast.success(`Welcome back, ${user.name || user.email}`);
+      const context = await login(values);
+      toast.success(
+        `Welcome back, ${context.user.name || context.user.email}`,
+      );
       router.replace(routes.dashboard);
     } catch (error) {
       const message =

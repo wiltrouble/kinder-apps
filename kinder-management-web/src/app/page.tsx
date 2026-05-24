@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { FullPageLoader } from "@/components/shared/FullPageLoader";
-import { routes } from "@/constants/routes";
+import { FullPageLoader } from "@/components/shared/fullPageLoader";
 import { useAuth } from "@/hooks/useAuth";
+import { routes } from "@/lib/routes";
 
 export default function RootPage() {
   const router = useRouter();

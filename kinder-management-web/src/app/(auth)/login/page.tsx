@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { LoginForm } from "@/components/forms/loginForm";
+import { BrandMark } from "@/components/shared/brandMark";
 import {
   Card,
   CardContent,
@@ -7,8 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BrandMark } from "@/components/shared/BrandMark";
-import { LoginForm } from "@/components/forms/LoginForm";
 import { appConfig } from "@/constants/app";
 
 export const metadata: Metadata = {

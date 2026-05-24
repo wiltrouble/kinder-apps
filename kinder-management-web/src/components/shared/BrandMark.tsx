@@ -13,7 +13,7 @@ export const BrandMark = ({
   showName = true,
 }: BrandMarkProps) => {
   return (
-    <div className={cn("flex items-center gap-2", className)}>
+    <div className={cn("flex items-center gap-2.5", className)}>
       <span className="grid size-9 place-items-center rounded-xl bg-primary text-primary-foreground shadow-sm">
         <Sparkles className="size-4" aria-hidden />
       </span>
