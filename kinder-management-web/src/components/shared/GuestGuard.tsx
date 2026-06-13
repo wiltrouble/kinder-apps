@@ -3,7 +3,7 @@
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
-import { FullPageLoader } from "@/components/shared/fullPageLoader";
+import { FullPageLoader } from "@/components/shared/FullPageLoader";
 import { useAuth } from "@/hooks/useAuth";
 import { routes } from "@/lib/routes";
 

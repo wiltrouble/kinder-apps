@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ShieldOff } from "lucide-react";
 
-import { BrandMark } from "@/components/shared/brandMark";
+import { BrandMark } from "@/components/shared/BrandMark";
 import { LogoutButton } from "@/components/shared/logoutButton";
 import { Button } from "@/components/ui/button";
 import {

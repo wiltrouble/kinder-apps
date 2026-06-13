@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { GuestGuard } from "@/components/shared/guestGuard";
+import { GuestGuard } from "@/components/shared/GuestGuard";
 
 interface AuthLayoutProps {
   children: ReactNode;

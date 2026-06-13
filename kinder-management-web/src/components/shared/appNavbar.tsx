@@ -2,7 +2,7 @@
 
 import { Menu } from "lucide-react";
 
-import { BrandMark } from "@/components/shared/brandMark";
+import { BrandMark } from "@/components/shared/BrandMark";
 import { UserDropdown } from "@/components/shared/userDropdown";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

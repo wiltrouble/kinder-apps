@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { useMemo } from "react";
 
-import { BrandMark } from "@/components/shared/brandMark";
+import { BrandMark } from "@/components/shared/BrandMark";
 import { LogoutButton } from "@/components/shared/logoutButton";
 import { NavItem } from "@/components/shared/navItem";
 import { Button } from "@/components/ui/button";

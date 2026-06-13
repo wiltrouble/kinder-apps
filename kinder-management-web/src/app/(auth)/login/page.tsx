@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { LoginForm } from "@/components/forms/loginForm";
-import { BrandMark } from "@/components/shared/brandMark";
+import { LoginForm } from "@/components/forms/LoginForm";
+import { BrandMark } from "@/components/shared/BrandMark";
 import {
   Card,
   CardContent,
